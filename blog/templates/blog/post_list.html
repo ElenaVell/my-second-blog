@@ -1,27 +1,14 @@
-{% load staticfiles %}
-<html>
-	<head>
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-		<link rel="stylesheet" href="{% static 'css/blog.css' %}">
-		<link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
-		<title> Lena's BLOG </title>
-	</head>
-	<body>
-		<div>
-			<h1><a href="/">Lena's First Blog</a></h1>
-		</div>
-		{% for post in posts %}
-			<div>
-				<p> published {{post.published_date}} </p>
-				<h1><a href="">{{ post.title }}</a></h1>
-				<p>{{ post.text|linebreaksbr }}</p>
-			</div>
-		{% endfor %}
-
-		<div>
-			<h2><a href=""> My first POST </a></h2>
-			<p> Finally It's spring!!! The sun is shining outside a window:)) But, unfortunally, I have to sitting at home and studying PYTHON and DJANGO!((( </p>
-		</div>
-	</body>
-</html>
+ {% extends 'blog/base.html' %}
+ 	{%  block content %}
+                    
+        {% for post in posts %}
+            <div class="post">
+            	<div class="date">
+                	{{ post.published_date }}
+            	</div>
+             	<h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            	<p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    {% endblock content %}
+                
